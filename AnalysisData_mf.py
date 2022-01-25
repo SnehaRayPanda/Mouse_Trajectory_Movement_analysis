@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sat Jan 22 21:29:09 2022
+Created on Sat Jan 17 21:29:09 2022
 
-@author: bkbme
+@author: Sneha Ray
 """
 
 #!/usr/bin/env python
@@ -115,13 +115,13 @@ plt.show()
 #%% histogram of two group
 allsubjectsdata_latency_male = allsubjectsdata_male[:,2]
 plt.hist(allsubjectsdata_latency_male)
-plt.title('Latency of Male')
+plt.title('Hitsogram Representation for Latency values of Male')
 plt.ylabel('No of Trial')
 plt.xlabel('Latency values')
 plt.show()
 allsubjectsdata_latency_female = allsubjectsdata_female[:,2]
 plt.hist(allsubjectsdata_latency_female)
-plt.title('Latency of Female')
+plt.title('Hitsogram Representation for Latency values of Female')
 plt.ylabel('No of Trial')
 plt.xlabel('Latency')
 plt.show()
@@ -133,16 +133,16 @@ allsubjectsdata_latency_female_mean = np.mean(allsubjectsdata_female[:,2])
 print('Mean of Latency for female group = ' + str(allsubjectsdata_latency_female_mean))
 
 allsubjectsdata_latency_male_std = np.std(allsubjectsdata_male[:,2])
-print('Stdev of Latency for male group = ' + str(allsubjectsdata_latency_male_mean))
+print('Stdev of Latency for male group = ' + str(allsubjectsdata_latency_male_std))
 
-allsubjectsdata_latency_female_mean = np.std(allsubjectsdata_female[:,2])
-print('Stdev of Latency for female group = ' + str(allsubjectsdata_latency_female_mean))
+allsubjectsdata_latency_female_std = np.std(allsubjectsdata_female[:,2])
+print('Stdev of Latency for female group = ' + str(allsubjectsdata_latency_female_std))
 
-allsubjectsdata_latency_male_mean = np.median(allsubjectsdata_male[:,2])
-print('Median of Latency for male group = ' + str(allsubjectsdata_latency_male_mean))
+allsubjectsdata_latency_male_median = np.median(allsubjectsdata_male[:,2])
+print('Median of Latency for male group = ' + str(allsubjectsdata_latency_male_median))
 
-allsubjectsdata_latency_female_mean = np.median(allsubjectsdata_female[:,2])
-print('Median of Latency for female group = ' + str(allsubjectsdata_latency_female_mean))
+allsubjectsdata_latency_female_median = np.median(allsubjectsdata_female[:,2])
+print('Median of Latency for female group = ' + str(allsubjectsdata_latency_female_median))
 
 t, p = ttest_ind(allsubjectsdata_male, allsubjectsdata_female, equal_var=False)
 print('p value between male vs female group = ' + str(p[2]))
