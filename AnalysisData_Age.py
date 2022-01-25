@@ -11,8 +11,12 @@ import os
 import glob
 import matplotlib.pyplot as plt
 from scipy.stats import ttest_ind
+import scipy.stats as stats
+import pandas as pd 
+import statsmodels.api as sm
+from statsmodels.formula.api import ols
 
-# In[131]:
+#%% In[131]:
 
 
 subjectdir_above25 = "C:/Users/bkbme/Desktop/Sneha_program/data_analysis/age/above25/"
@@ -183,10 +187,26 @@ t_upto25vsUpto21, p_upto25vsUpto21 = ttest_ind(allsubjectsdata_upto25, allsubjec
 print('p value between Upto25 and Upto21 group = ' + str(p_upto25vsUpto21[2]))
 print('t value between Upto25 and Upto21 group = ' + str(t_upto25vsUpto21[2]))
 
-
-#%%
+#%% Run the statistics for three group using Anova
+# creat Data frame for the thre group latency
 a1= allsubjectsdata_above25[:,2]
 a2= allsubjectsdata_upto25[:,2]
 a3= allsubjectsdata_upto21[:,2]
 
+a1_n=a1;
+for x in range(2745):
+    a1_n = np.append(a1_n, [np.nan])
+    
+a3_n=a3;
+for x in range(2436):
+    a3_n = np.append(a3_n, [np.nan])
+    
+data_latency = {'Above_25':a1_n, 'Upto 25': a2, 'Upto 21': a3_n}
+
 #data_latency = {'Above_25':allsubjectsdata_above25[:,2], 'Upto 25': allsubjectsdata_upto25[:,2], 'Upto 21': allsubjectsdata_upto21[:,2]}
+df_latency = pd.DataFrame(data_latency)
+
+# build the model and use the Anova test for three groups
+model = ols('latency ~ C(age)', data=df).fit()
+aov_table = sm.stats.anova_lm(model, typ=2)
+aov_table
